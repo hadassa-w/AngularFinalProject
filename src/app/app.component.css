@@ -1,0 +1,13 @@
+.entry {
+    display: flex;
+    /* משתמש ב-Flexbox */
+    flex-direction: column;
+    /* מגדיר את הכיוון לעמודה */
+    align-items: center;
+    /* מרכז את האובייקטים על ציר ה-X */
+}
+
+.links {
+    margin: 0 10px;
+    /* מוסיף רווח בין הקישורים */
+}

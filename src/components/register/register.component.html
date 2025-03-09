@@ -1,0 +1,49 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h1>Sign up as an existing user</h1>
+    <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter your name">
+        @if (registerForm.get('name')?.hasError('required')){
+        <mat-error> Name is <strong>required</strong></mat-error>
+        }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
+            placeholder="Enter your Email. Ex. pat@example.com">
+        @if (registerForm.get('email')?.hasError('email') && !registerForm.get('email')?.hasError('required')){
+        <mat-error>Please enter a valid email address</mat-error>
+        }
+        @if (registerForm.get('email')?.hasError('required')){
+        <mat-error>Email is <strong>required</strong></mat-error>
+        }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Enter your password">
+        @if (registerForm.get('password')?.hasError('required')){
+        <mat-error> Password is <strong>required</strong></mat-error>
+        }
+        @if (registerForm.get('password')?.hasError('minlength')){
+        <mat-error> Password must be at least 6 characters long.</mat-error>
+        }
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Role</mat-label>
+        <input matInput formControlName="role" placeholder="Enter your role: student/teacher/admin">
+        @if (registerForm.get('role')?.hasError('required')){
+        <mat-error> Role is <strong>required</strong></mat-error>
+        }
+    </mat-form-field>
+    <br>
+
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>
+    </div>
+</form>

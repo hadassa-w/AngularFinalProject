@@ -1,0 +1,24 @@
+<div class="courses-list">
+  <h1>רשימת קורסים</h1>
+
+  @if(courses && courses.length > 0)
+  {
+  <div>
+    @for(course of courses; track course.id)
+    {
+    <div class="course-card">
+      <h2>{{ course.title }}</h2>
+      <p>{{ course.description }}</p>
+
+      <button (click)="toggleEnrollment(course.id)">
+        {{ isEnrolled(course.id) ? 'עזוב את הקורס' : 'הצטרף לקורס' }}
+      </button>
+    </div>
+    }
+  </div>
+  }
+  @else {
+  <p>אין קורסים זמינים כרגע.</p>
+
+  }
+</div>

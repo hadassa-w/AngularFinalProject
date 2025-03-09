@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    justify-content: center;
+    /* מרכז את הקומפוננטה אופקית */
+    align-items: center;
+    /* מרכז את הקומפוננטה אנכית */
+}
+
+form {
+    max-width: 500px;
+    /* מגביל את הרוחב של הטופס */
+    padding: 20px;
+    /* ריווח פנימי */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* צל לטופס */
+    border-radius: 8px;
+    /* פינות מעוגלות */
+    background-color: #fff;
+    /* צבע רקע לבן */
+    display: flex;
+    /* משתמש ב-Flexbox */
+    flex-direction: column;
+    /* מסדר את האלמנטים בעמודה */
+    align-items: center;
+    /* מרכז את האלמנטים בציר ה-X */
+    justify-content: center;
+    /* מרכז את האלמנטים בציר ה-Y */
+}
+
+:host {
+    display: flex;
+    justify-content: center;
+    /* מרכז את הקומפוננטה אופקית */
+    align-items: center;
+    /* מרכז את הקומפוננטה אנכית */
+}
