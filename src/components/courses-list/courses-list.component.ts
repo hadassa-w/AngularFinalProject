@@ -1,146 +1,137 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../services/courses/courses.service';
 import { Course } from '../../modules/course.module';
-import { UsersService } from '../../services/users/users.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { catchError, of, tap } from 'rxjs';
+import { User } from '../../modules/user.module';
+
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-courses-list',
   standalone: true,
-  imports: [],
+  imports: [MatDividerModule, MatCardModule, MatListModule, MatButtonModule, MatIconModule],
   templateUrl: './courses-list.component.html',
-  styleUrl: './courses-list.component.css'
+  styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnInit {
   courses: Course[] = [];
+  token: string | null = null;
+  role: string | null = null;
+  message: string | null = null; // משתנה להודעה
 
   constructor(
-    private usersService: UsersService,
-    private coursesService: CoursesService
-  ) { }
-
-  ngOnInit(): void {
-    this.loadCourses();
-  }
-
-  loadCourses() {
-    this.coursesService.getCourses().subscribe({
-      next: (data) => {
-        this.courses = data;
-      },
-      error: (err) => {
-        console.error('Error fetching courses', err);
-      }
-    });
-  }
-
-  toggleEnrollment(courseId: number) {
-    if (this.isEnrolled(courseId)) {
-      this.leaveCourse(courseId);
-    } else {
-      this.joinCourse(courseId);
+    private coursesService: CoursesService,
+    private http: HttpClient,
+    private router: Router
+  ) {
+    if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+      this.token = sessionStorage.getItem("token");
+      this.role = localStorage.getItem('role');
     }
   }
 
-  isEnrolled(courseId: number): boolean {
-    return this.usersService.isEnrolled(courseId);
+  ngOnInit(): void {
+    this.loadCourses();
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      this.role = localStorage.getItem('role');
+    }
   }
 
-  joinCourse(courseId: number): void {
-    this.usersService.joinCourse(courseId).subscribe({
-      next: () => {
-        console.log('הצטרפת לקורס בהצלחה!');
-        this.loadCourses(); // נטען מחדש את הקורסים
-      },
-      error: (err) => {
-        console.log('שגיאה בהצטרפות לקורס');
-        console.error(err);
-      }
-    });
+  loadCourses() {
+    if (this.token) {
+      this.coursesService.getCourses(this.token).pipe(
+        tap((data) => {
+          this.courses = data; // שמירת המידע במערך
+        }),
+        catchError((error) => {
+          console.error('Error fetching courses', error); // טיפול בשגיאות
+          return of([]);
+        })
+      ).subscribe();
+    } else {
+      console.error('Token is not available');
+    }
   }
 
-  leaveCourse(courseId: number): void {
-    this.usersService.leaveCourse(courseId).subscribe({
-      next: () => {
-        console.log('עזבת את הקורס בהצלחה!');
-        this.loadCourses(); // נטען מחדש את הקורסים
-      },
-      error: (err) => {
-        console.log('שגיאה בעזיבת הקורס');
-        console.error(err);
-      }
-    });
+  editCourse(course: any) {
+    this.router.navigate(['/manageCourses'], { state: { courseData: course } });
   }
-  //  courses: Course[] = [];
 
-  // constructor(
-  //   private usersService: UsersService,
-  //   private coursesService: CoursesService
-  // ) { }
+  getLessons(course: any) {
+    console.log('course', course);  
+    console.log(course.id);
+    this.router.navigate(['/lessonsList'], { state: { courseData: course } });
+  }
 
-  // // ngOnInit() {
-  // //   this.loadCourses();
-  // // }
+  joinCourse(course: Course) {
+    if (this.token) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      });
+      const userId: string | null = localStorage.getItem('userId');
+      this.http.post<User>(`http://localhost:3000/api/courses/${course.id}/enroll`, { userId }, { headers })
+        .subscribe({
+          next: (response) => {
+            console.log('the user join successfully', response);
+          },
+          error: (error) => {
+            console.error('Error ', error); // טיפול בשגיאות
+            alert('הנך רשום כבר לקורס זה');
+          }
+        });
+    } else {
+      console.error('Token is not available');
+    }
+  }
 
-  // loadCourses() {
-  //   this.coursesService.getCourses().subscribe(courses => {
-  //     this.courses = courses;
-  //   });
-  // }
+  leaveCourse(course: Course) {
+    if (this.token) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      });
+      const userId: string | null = localStorage.getItem('userId');
+      this.http.delete<User>(`http://localhost:3000/api/courses/${course.id}/unenroll`, {
+        headers,
+        body: { userId } // הוספת userId לגוף הבקשה
+      })
+        .subscribe({
+          next: (response) => {
+            console.log('the user delete successfully', response);
+          },
+          error: (error) => {
+            console.error('Error ', error); // טיפול בשגיאות
+            alert('הנך לא רשום לקורס זה');
+          }
+        });
+    } else {
+      console.error('Token is not available');
+    }
+  }
 
-  // toggleEnrollment(courseId: number) {
-  //   if (this.isEnrolled(courseId)) {
-  //     this.usersService.leaveCourse(courseId);
-  //   } else {
-  //     this.usersService.joinCourse(courseId);
-  //   }
-  // }
+  deleteCourse(id: number | undefined) {
+    if (this.token) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.token}`
+      });
 
-  // isEnrolled(courseId: number): boolean {
-  //   return this.usersService.isEnrolled(courseId);
-  // }
-
-  // // courses: any[] = [];
-
-  // // constructor(private coursesService: CoursesService) { }
-
-  // ngOnInit(): void {
-  //   // קבלת כל הקורסים
-  //   this.coursesService.getCourses().subscribe({
-  //     next: (data) => {
-  //       this.courses = data;
-  //     },
-  //     error: (err) => {
-  //       console.error('Error fetching courses', err);
-  //     }
-  //   });
-  // }
-
-  // joinCourse(courseId: number): void {
-  //   // כאן נבצע קריאה ל-API כדי להצטרף לקורס
-  //   this.coursesService.joinCourse(courseId).subscribe({
-  //     next: () => {
-  //       alert('הצטרפת לקורס בהצלחה!');
-  //       this.ngOnInit(); // נטען מחדש את הקורסים
-  //     },
-  //     error: (err) => {
-  //       alert('שגיאה בהצטרפות לקורס');
-  //       console.error(err);
-  //     }
-  //   });
-  // }
-
-  // leaveCourse(courseId: number): void {
-  //   // כאן נבצע קריאה ל-API כדי לעזוב את הקורס
-  //   this.coursesService.leaveCourse(courseId).subscribe({
-  //     next: () => {
-  //       alert('עזבת את הקורס בהצלחה!');
-  //       this.ngOnInit(); // נטען מחדש את הקורסים
-  //     },
-  //     error: (err) => {
-  //       alert('שגיאה בעזיבת הקורס');
-  //       console.error(err);
-  //     }
-  //   });
-  // }
-
+      this.http.delete(`http://localhost:3000/api/courses/${id}`, { headers })
+        .subscribe({
+          next: (response) => {
+            console.log('Course deleted successfully', response);
+            this.courses = this.courses.filter(course => course.id !== id);
+          },
+          error: (error) => {
+            console.error('Error deleting course', error); // טיפול בשגיאות
+          }
+        });
+    } else {
+      console.error('Token is not available');
+    }
+  }
 }

@@ -1,8 +1,27 @@
-<div class="course-management">
+<h1>{{ isEditMode ? 'עריכת קורס' : 'הוספת קורס - למורים בלבד' }}</h1>
+
+<form [formGroup]="postCourseForm" (ngSubmit)="onSubmit()">
+    <div formGroupName="course">
+        <mat-form-field appearance="fill">
+            <mat-label>title </mat-label>
+            <input matInput formControlName="title"/>         
+        </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+            <mat-label>description </mat-label>
+            <input matInput formControlName="description"/>         
+        </mat-form-field>
+    </div>
+    <button mat-raised-button type="submit" [disabled]="postCourseForm.invalid">
+        {{ isEditMode ? 'עדכון קורס' : 'הוספת קורס' }}
+    </button>
+</form>
+
+<!-- <div class="course-management">
   <h1>ניהול קורסים</h1>
 
   <div class="course-form">
-    <h3>הוסף קורס חדש</h3>
+    <h1>{{ isEditMode ? 'עריכת שיעור' : 'הוספת שיעור - למורים בלבד' }}</h1>
     <form (ngSubmit)="addCourse()">
       <label for="title">שם הקורס:</label>
       <input type="text" id="title" [(ngModel)]="newCourse.title" name="title" required />
@@ -12,9 +31,9 @@
 
       <button type="submit">הוסף קורס</button>
     </form>
-  </div>
+  </div> -->
 
-  @if(courses && courses.length > 0)
+  <!-- @if(courses && courses.length > 0)
   {
   <div>
     <h3>הקורסים הקיימים</h3>
@@ -36,4 +55,4 @@
   {
   <p>אין קורסים שצריך לנהל כרגע.</p>
   }
-</div>
+</div> -->

@@ -1,6 +1,7 @@
 <div class="courses-list">
   <h1>רשימת קורסים</h1>
 
+  {{courses.length}}
   @if(courses && courses.length > 0)
   {
   <div>
@@ -8,10 +9,25 @@
     {
     <div class="course-card">
       <h2>{{ course.title }}</h2>
-      <p>{{ course.description }}</p>
-
-      <button (click)="toggleEnrollment(course.id)">
-        {{ isEnrolled(course.id) ? 'עזוב את הקורס' : 'הצטרף לקורס' }}
+      <p>תיאור הקורס: {{ course.description }}</p>
+      @if(role==="student"){
+      <button (click)="joinCourse(course)">
+        הצטרף לקורס
+      </button>
+      <button (click)="leaveCourse(course)">
+        עזוב את הקורס
+      </button>
+      }
+      @if(role==="teacher"){
+      <button (click)="editCourse(course)">
+        עריכת קורס
+      </button>
+      <button (click)="deleteCourse(course.id)">
+        מחיקת קורס
+      </button>
+      }
+      <button (click)="getLessons(course)">
+        שיעורי קורס
       </button>
     </div>
     }
@@ -19,6 +35,5 @@
   }
   @else {
   <p>אין קורסים זמינים כרגע.</p>
-
   }
 </div>

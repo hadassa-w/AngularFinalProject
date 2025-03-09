@@ -1,0 +1,32 @@
+<span class="icon" (click)="AddLesson()">
+    הוספת קורס
+</span>
+<div class="courses-list">
+    <h1>רשימת שיעורים</h1>
+
+    {{lessons.length}}
+    @if(lessons && lessons.length > 0)
+    {
+    <div>
+        @for(lesson of lessons; track lesson.id)
+        {
+        <div class="course-card">
+            <h2>{{ lesson.title }}</h2>
+            <p>תיאור השיעור: {{ lesson.content }}</p>
+            @if(role==="teacher"){
+            <button (click)="editLesson(lesson)">
+                עריכת שיעור
+            </button>
+            <button (click)="deleteLesson(lesson.id)">
+                מחיקת שיעור
+            </button>
+            }
+        </div>
+        }
+    </div>
+    }
+    @else {
+    <p>אין קורסים זמינים כרגע.</p>
+    }
+</div>
+

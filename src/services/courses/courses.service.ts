@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Course } from '../../modules/course.module';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,30 @@ export class CoursesService {
 
   constructor(private http: HttpClient) { }
 
-  getCourses(): Observable<any[]> {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+  getCourses(token: string): Observable<any[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // הוספת הטוקן לכותרת
+    });
     return this.http.get<any[]>(this.apiUrl, { headers });
   }
+
+  createCourse( title: string, description: string, teacherId: number | null , token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // הוספת הטוקן לכותרת
+    });
+    const course = { title, description, teacherId }
+    console.log(course)
+    return this.http.post<Course>(`${this.apiUrl}`, course, { headers })
+  }
+
+  updateCourse( title: string, description: string, teacherId: number | null , token: string, id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // הוספת הטוקן לכותרת
+    });
+    const course = { title, description, teacherId }
+    return this.http.put<Course>(`${this.apiUrl}/${id}`, course, { headers })
+  }
+
 
   getCourseById(courseId: number): Observable<any> {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
@@ -22,17 +42,17 @@ export class CoursesService {
     return this.http.get<any>(`${this.apiUrl}/${courseId}`, { headers });
   }
 
-  createCourse(course: any): Observable<any> {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
-    return this.http.post<any>(this.apiUrl, course, { headers });
-  }
+  // createCourse(course: any): Observable<any> {
+  //   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  //   const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+  //   return this.http.post<any>(this.apiUrl, course, { headers });
+  // }
 
-  updateCourse(courseId: number, course: any): Observable<any> {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
-    return this.http.put<any>(`${this.apiUrl}/${courseId}`, course, { headers });
-  }
+  // updateCourse(courseId: number, course: any): Observable<any> {
+  //   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  //   const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+  //   return this.http.put<any>(`${this.apiUrl}/${courseId}`, course, { headers });
+  // }
 
   deleteCourse(courseId: number): Observable<void> {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
@@ -40,15 +60,15 @@ export class CoursesService {
     return this.http.delete<void>(`${this.apiUrl}/${courseId}`, { headers });
   }
 
-  joinCourse(courseId: number): Observable<any> {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
-    return this.http.post<any>(`${this.apiUrl}/${courseId}/join`, {}, { headers });
-  }
+  // joinCourse(courseId: number): Observable<any> {
+  //   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  //   const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+  //   return this.http.post<any>(`${this.apiUrl}/${courseId}/join`, {}, { headers });
+  // }
 
-  leaveCourse(courseId: number): Observable<any> {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
-    return this.http.post<any>(`${this.apiUrl}/${courseId}/leave`, {}, { headers });
-  }
+  // leaveCourse(courseId: number): Observable<any> {
+  //   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  //   const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+  //   return this.http.post<any>(`${this.apiUrl}/${courseId}/leave`, {}, { headers });
+  // }
 }
