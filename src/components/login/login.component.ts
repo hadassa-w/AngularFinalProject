@@ -7,11 +7,12 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule, MatFormFieldModule, MatInputModule, MatDividerModule],
+  imports: [ReactiveFormsModule, RouterModule, MatFormFieldModule, MatInputModule, MatDividerModule,MatButtonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

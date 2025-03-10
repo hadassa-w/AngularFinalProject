@@ -1,6 +1,9 @@
 <div>
     @if(role=="teacher")
-    { <button class="links" (click)="AddLesson()">Add lesson</button>}
+    { <button mat-raised-button class="links" (click)="AddLesson()">
+        <mat-icon>add</mat-icon>
+        Add lesson
+    </button>}
     <h1>Lesson list</h1>
     @if(lessons && lessons.length > 0)
     {
@@ -8,17 +11,24 @@
         @for(lesson of lessons; track lesson.id)
         {
         <div>
-            <h2>{{ lesson.title }}</h2>
-            <p>Lesson description: {{ lesson.content }}</p>
-            @if(role==="teacher"){
-            <button (click)="editLesson(lesson)">
-                Lesson editing
-            </button>
-            <button (click)="deleteLesson(lesson.id)">
-                Deleting a lesson
-            </button>
-            }
+            <mat-card>
+                <mat-card-content>
+                    <h2>{{ lesson.title }}</h2>
+                    <p>Lesson description: {{ lesson.content }}</p>
+                    @if(role==="teacher"){
+                    <button mat-raised-button (click)="editLesson(lesson)">
+                        <mat-icon>edit</mat-icon>
+                        Lesson editing
+                    </button>
+                    <button mat-raised-button (click)="deleteLesson(lesson.id)">
+                        <mat-icon>delete</mat-icon>
+                        Deleting a lesson
+                    </button>
+                    }
+                </mat-card-content>
+            </mat-card>
         </div>
+        <br>
         }
     </div>
     }

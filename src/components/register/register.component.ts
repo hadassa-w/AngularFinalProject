@@ -7,11 +7,12 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule, FormsModule, MatFormFieldModule, MatInputModule, FormsModule, MatDividerModule],
+  imports: [ReactiveFormsModule, RouterModule, FormsModule, MatFormFieldModule, MatInputModule, FormsModule, MatDividerModule, MatSelectModule,MatButtonModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -19,6 +20,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   private router: Router; // הוספת המשתנה router כמאפיין של הקומפוננטה
   errorMessage: string = '';
+  roles: string[] = ["student", "teacher", "admin"];
 
   constructor(private fb: FormBuilder, private usersService: UsersService, router: Router) {
     this.router = router; // השמת הערך של הפרמטר למשתנה הפרטי

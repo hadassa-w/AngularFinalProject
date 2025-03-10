@@ -4,11 +4,14 @@ import { LessonsService } from '../../services/lessons/lessons.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, tap, of } from 'rxjs';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-lessons-list',
   standalone: true,
-  imports: [],
+  imports: [MatCardModule, MatButtonModule,MatIconModule],
   templateUrl: './lessons-list.component.html',
   styleUrl: './lessons-list.component.css'
 })

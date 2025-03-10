@@ -3,17 +3,26 @@
 <h1 class="entry">Welcome!</h1>
 <section class="entry">
     <div>
-        <button class="links" [routerLink]="['/login']">Login</button>
-        <button class="links" [routerLink]="['/register']">Register</button>
+        <button mat-raised-button class="links" [routerLink]="['/login']">Login</button>
+        <button mat-raised-button class="links" [routerLink]="['/register']">
+            <mat-icon>person_add</mat-icon>
+            Register
+        </button>
     </div>
 </section>
 }
 @if (isLoggedIn===true) {
 <section class="entry">
     <div>
-        <button class="links" [routerLink]="['/coursesList']">Courses list</button>
+        <button mat-raised-button class="links" [routerLink]="['/coursesList']">
+            <mat-icon>list</mat-icon>
+            Courses list
+        </button>
         <!-- <button class="links" [routerLink]="['/manageCourses']">Add course</button> -->
-        <button (click)="logout()">Logout</button>
+        <button mat-raised-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+        </button>
     </div>
 </section>
 }

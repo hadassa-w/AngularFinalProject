@@ -34,14 +34,17 @@
     </mat-form-field>
     <br>
 
-    <mat-form-field class="example-full-width">
-        <mat-label>Role</mat-label>
-        <input matInput formControlName="role" placeholder="Enter your role: student/teacher/admin">
+    <mat-form-field>
+        <mat-label>Choose your role</mat-label>
+        <mat-select matInput formControlName="role">
+            @for (role of roles; track role) {
+            <mat-option [value]="role">{{role}}</mat-option>
+            }
+        </mat-select>
         @if (registerForm.get('role')?.hasError('required')){
         <mat-error> Role is <strong>required</strong></mat-error>
         }
     </mat-form-field>
-    <br>
 
     <div class="example-button-row">
         <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>

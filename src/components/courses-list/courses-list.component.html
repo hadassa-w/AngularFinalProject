@@ -1,6 +1,9 @@
 <div class="courses-list">
   @if(role=="teacher")
-  { <button class="links" [routerLink]="['/manageCourses']">Add course</button>}
+  { <button mat-raised-button class="links" [routerLink]="['/manageCourses']">
+    <mat-icon>add</mat-icon>
+    Add course
+  </button>}
   <h1>List of courses</h1>
   @if(courses && courses.length > 0)
   {
@@ -8,28 +11,38 @@
     @for(course of courses; track course.id)
     {
     <div class="course-card">
-      <h2>{{ course.title }}</h2>
-      <p>Course description: {{ course.description }}</p>
-      @if(role==="student"){
-      <button (click)="joinCourse(course)">
-        Joining the course
-      </button>
-      <button (click)="leaveCourse(course)">
-        Leaving the course
-      </button>
-      }
-      @if(role==="teacher"){
-      <button (click)="editCourse(course)">
-        Course editing
-      </button>
-      <button (click)="deleteCourse(course.id)">
-        Deleting a course
-      </button>
-      }
-      <button (click)="getLessons(course)">
-        Course lessons
-      </button>
+      <mat-card>
+        <mat-card-content>
+          <h2>{{ course.title }}</h2>
+          <p>Course description: {{ course.description }}</p>
+          @if(role==="student"){
+          <button mat-raised-button (click)="joinCourse(course)">
+            <mat-icon>add</mat-icon>
+            Joining the course
+          </button>
+          <button mat-raised-button (click)="leaveCourse(course)">
+            <mat-icon>remove</mat-icon>
+            Leaving the course
+          </button>
+          }
+          @if(role==="teacher"){
+          <button mat-raised-button (click)="editCourse(course)">
+            <mat-icon>edit</mat-icon>
+            Course editing
+          </button>
+          <button mat-raised-button (click)="deleteCourse(course.id)">
+            <mat-icon>delete</mat-icon>
+            Deleting a course
+          </button>
+          }
+          <button mat-raised-button (click)="getLessons(course)">
+            <mat-icon>list</mat-icon>
+            Course lessons
+          </button>
+        </mat-card-content>
+      </mat-card>
     </div>
+    <br>
     }
   </div>
   }
