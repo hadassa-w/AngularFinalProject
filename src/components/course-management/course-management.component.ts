@@ -11,11 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-course-management',
   standalone: true,
-  imports: [MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatIconModule,
-    ReactiveFormsModule],
+  imports: [MatButtonModule, MatInputModule, MatFormFieldModule, MatIconModule, ReactiveFormsModule],
   templateUrl: './course-management.component.html',
   styleUrl: './course-management.component.css'
 })
@@ -24,13 +20,13 @@ export class CourseManagementComponent {
   newCourse: Course = new Course('', '', 0);
   token: string | any = sessionStorage.getItem("token")
   role: string | any = localStorage.getItem('role')
-  postCourseForm: FormGroup;
+  CourseForm: FormGroup;
   isEditMode = false;
 
-  constructor(private fb: FormBuilder,private coursesService: CoursesService,private router:Router) {
+  constructor(private fb: FormBuilder, private coursesService: CoursesService, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     const courseData = navigation?.extras.state?.['courseData'];
-    this.postCourseForm = this.fb.group({
+    this.CourseForm = this.fb.group({
       course: this.fb.group({
         title: [courseData ? courseData.title : '', Validators.required],
         description: [courseData ? courseData.description : '', Validators.required],
@@ -42,7 +38,7 @@ export class CourseManagementComponent {
       console.log('Edit mode');
       this.isEditMode = true;
     }
-   }
+  }
 
   ngOnInit(): void {
     this.loadCourses();
@@ -60,7 +56,7 @@ export class CourseManagementComponent {
   }
 
   addCourse(): void {
-    this.coursesService.createCourse(this.newCourse.title,this.newCourse.description,this.newCourse.teacherId, this.token).subscribe({
+    this.coursesService.createCourse(this.newCourse.title, this.newCourse.description, this.newCourse.teacherId, this.token).subscribe({
       next: (course) => {
         this.courses.push(course);
         this.newCourse = new Course('', '', 0); // איפוס השדות לאחר הוספת הקורס
@@ -70,17 +66,6 @@ export class CourseManagementComponent {
       }
     });
   }
-
-  // editCourse(course: Course): void {
-  //   this.coursesService.updateCourse(course, this.token, course.id).subscribe({
-  //     next: () => {
-  //       console.log('Course updated successfully');
-  //     },
-  //     error: (err) => {
-  //       console.error('Error updating course', err);
-  //     }
-  //   });
-  // }
 
   deleteCourse(courseId: number): void {
     this.coursesService.deleteCourse(courseId).subscribe({
@@ -94,18 +79,17 @@ export class CourseManagementComponent {
   }
 
   onSubmit(): void {
-    //const storedUserId = localStorage.getItem('userId');
     const userId: number | null = localStorage.getItem('userId') ? parseInt(localStorage.getItem('userId')!) : null;
 
     console.log(userId);
-    console.log(this.postCourseForm.value.course.id);
+    console.log(this.CourseForm.value.course.id);
 
     if (this.isEditMode) {
-      if (this.postCourseForm.valid) {
-        console.log(this.postCourseForm.value);
-        this.coursesService.updateCourse(this.postCourseForm.value.course.title, this.postCourseForm.value.course.description,userId, this.token, this.postCourseForm.value.course.id).subscribe({
+      if (this.CourseForm.valid) {
+        console.log(this.CourseForm.value);
+        this.coursesService.updateCourse(this.CourseForm.value.course.title, this.CourseForm.value.course.description, userId, this.token, this.CourseForm.value.course.id).subscribe({
           next: (data) => {
-            console.log("הקורס עודכן בהצלחה")
+            console.log("The course was successfully updated.")
             console.log(data);
 
           }
@@ -114,10 +98,10 @@ export class CourseManagementComponent {
       };
     }
     else {
-      if (this.postCourseForm.valid) {
-        console.log(this.postCourseForm.value);
-        this.coursesService.createCourse(this.postCourseForm.value.course.title, this.postCourseForm.value.course.description, userId, this.token).subscribe({
-          next: (data) => console.log("הקורס נוסף בהצלחה"), error: (err) => console.log("no")
+      if (this.CourseForm.valid) {
+        console.log(this.CourseForm.value);
+        this.coursesService.createCourse(this.CourseForm.value.course.title, this.CourseForm.value.course.description, userId, this.token).subscribe({
+          next: (data) => console.log("The course was added successfully."), error: (err) => console.log("ERROR: ", err)
         });
       };
     }

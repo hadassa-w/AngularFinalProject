@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../services/courses/courses.service';
 import { Course } from '../../modules/course.module';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
 import { User } from '../../modules/user.module';
 
@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-courses-list',
   standalone: true,
-  imports: [MatDividerModule, MatCardModule, MatListModule, MatButtonModule, MatIconModule],
+  imports: [MatDividerModule, MatCardModule, MatListModule, MatButtonModule, MatIconModule,RouterLink],
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.css']
 })
@@ -64,7 +64,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   getLessons(course: any) {
-    console.log('course', course);  
+    console.log('course', course);
     console.log(course.id);
     this.router.navigate(['/lessonsList'], { state: { courseData: course } });
   }
@@ -82,7 +82,7 @@ export class CoursesListComponent implements OnInit {
           },
           error: (error) => {
             console.error('Error ', error); // טיפול בשגיאות
-            alert('הנך רשום כבר לקורס זה');
+            alert('You are already registered for this course.');
           }
         });
     } else {
@@ -106,7 +106,7 @@ export class CoursesListComponent implements OnInit {
           },
           error: (error) => {
             console.error('Error ', error); // טיפול בשגיאות
-            alert('הנך לא רשום לקורס זה');
+            alert('You are not registered for this course.');
           }
         });
     } else {

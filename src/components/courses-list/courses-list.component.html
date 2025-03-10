@@ -1,5 +1,6 @@
+<button class="links" [routerLink]="['/manageCourses']">Add course</button>
 <div class="courses-list">
-  <h1>רשימת קורסים</h1>
+  <h1>List of courses</h1>
 
   {{courses.length}}
   @if(courses && courses.length > 0)
@@ -9,31 +10,31 @@
     {
     <div class="course-card">
       <h2>{{ course.title }}</h2>
-      <p>תיאור הקורס: {{ course.description }}</p>
+      <p>Course description: {{ course.description }}</p>
       @if(role==="student"){
       <button (click)="joinCourse(course)">
-        הצטרף לקורס
+        Joining the course
       </button>
       <button (click)="leaveCourse(course)">
-        עזוב את הקורס
+        Leaving the course
       </button>
       }
       @if(role==="teacher"){
       <button (click)="editCourse(course)">
-        עריכת קורס
+        Course editing
       </button>
       <button (click)="deleteCourse(course.id)">
-        מחיקת קורס
+        Deleting a course
       </button>
       }
       <button (click)="getLessons(course)">
-        שיעורי קורס
+        Course lessons
       </button>
     </div>
     }
   </div>
   }
   @else {
-  <p>אין קורסים זמינים כרגע.</p>
+  <p>There are no courses available at the moment.</p>
   }
 </div>

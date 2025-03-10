@@ -1,24 +1,27 @@
-
-
-<h1>{{ isEditMode ? 'עריכת שיעור' : 'הוספת שיעור - למורים בלבד' }}</h1>
-
-<form [formGroup]="postLessonForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="LessonForm" (ngSubmit)="onSubmit()">
+    <h1>{{ isEditMode ? 'Lesson editing' : 'Adding a lesson - for teachers only' }}</h1>
     <div formGroupName="lesson">
-        <mat-form-field appearance="fill">
-            <mat-label>title </mat-label>
-            <input matInput formControlName="title"/>         
+        <mat-form-field class="example-full-width">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title" placeholder="Enter lesson title">
+            @if(LessonForm.get('lesson.title')?.hasError('required'))
+            { <mat-error>
+                Title is <strong>required</strong>
+            </mat-error>}
         </mat-form-field>
-      
-        <mat-form-field appearance="fill">
-            <mat-label>content </mat-label>
-            <input matInput formControlName="content"/>         
+        <br>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Content</mat-label>
+            <input matInput formControlName="content" placeholder="Enter lesson content">
+            @if(LessonForm.get('lesson.content')?.hasError('required'))
+            { <mat-error>
+                Content is <strong>required</strong>
+            </mat-error>}
         </mat-form-field>
+        <br>
     </div>
-    <button mat-raised-button type="submit" [disabled]="postLessonForm.invalid">
-        {{ isEditMode ? 'עדכון שעור' : 'הוספת שעור' }}
+    <button mat-raised-button type="submit" [disabled]="LessonForm.invalid">
+        {{ isEditMode ? 'Lesson update' : 'Adding a lesson' }}
     </button>
 </form>
-
-
-
-

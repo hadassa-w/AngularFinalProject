@@ -1,21 +1,21 @@
 @if(isLoggedIn===false)
 {
-    <h1 class="entry">Welcome!</h1>
-    <section class="entry">
-        <div>
-            <a routerLink="/login" class="links">Login</a>
-            <a routerLink="/register" class="links">Register</a>
-        </div>
-    </section>
+<h1 class="entry">Welcome!</h1>
+<section class="entry">
+    <div>
+        <button class="links" [routerLink]="['/login']">Login</button>
+        <button class="links" [routerLink]="['/register']">Register</button>
+    </div>
+</section>
 }
 @if (isLoggedIn===true) {
-    <section class="entry">
-        <div>
-            <a routerLink="/coursesList">Courses list </a><br />
-            <a routerLink="/manageCourses">Add course</a><br />
-            <button (click)="logout()">Logout</button>
-        </div>
-    </section>
+<section class="entry">
+    <div>
+        <button class="links" [routerLink]="['/coursesList']">Courses list</button>
+        <!-- <button class="links" [routerLink]="['/manageCourses']">Add course</button> -->
+        <button (click)="logout()">Logout</button>
+    </div>
+</section>
 }
 <br>
 <router-outlet></router-outlet>
