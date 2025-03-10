@@ -8,15 +8,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule, MatFormFieldModule, MatInputModule, MatDividerModule,MatButtonModule],
+  imports: [ReactiveFormsModule, RouterModule, MatFormFieldModule, MatInputModule, MatDividerModule, MatButtonModule, MatIconModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  hide: boolean = true;
   loginForm: FormGroup;
   private router: Router; // הוספת המשתנה router כמאפיין של הקומפוננטה
   errorMessage: string = '';

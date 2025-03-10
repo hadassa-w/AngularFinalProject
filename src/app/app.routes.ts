@@ -6,9 +6,9 @@ import { CourseManagementComponent } from '../components/course-management/cours
 import { LessonsListComponent } from '../components/lessons-list/lessons-list.component';
 import { AddLessonComponent } from '../components/add-lesson/add-lesson.component';
 import { RouterModule } from '@angular/router';
+import { HomeComponent } from '../components/home/home.component';
 export const routes: Routes = [
-  // { path: '', redirectTo: '/login', pathMatch: 'full' }, // הפניה לנתיב login כאשר הנתיב ריק
-  { path: '', component: LoginComponent },
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'coursesList', component: CoursesListComponent },

@@ -1,3 +1,17 @@
+.entry {
+    display: flex;
+    /* משתמש ב-Flexbox */
+    flex-direction: column;
+    /* מגדיר את הכיוון לעמודה */
+    align-items: center;
+    /* מרכז את האובייקטים על ציר ה-X */
+}
+
+.links {
+    margin: 0 10px;
+    /* מוסיף רווח בין הקישורים */
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -6,7 +20,7 @@ body {
     /* מרכז את הקומפוננטה אנכית */
 }
 
-form {
+div {
     max-width: 500px;
     /* מגביל את הרוחב של הטופס */
     padding: 20px;
@@ -33,12 +47,4 @@ form {
     /* מרכז את הקומפוננטה אופקית */
     align-items: center;
     /* מרכז את הקומפוננטה אנכית */
-}
-
-mat-form-field {
-    width: 80%; /* או רוחב קבוע */
-}
-
-mat-icon-button {
-    height: 80%; /* מבטיח שהכפתור יתאים לגובה השדה */
 }

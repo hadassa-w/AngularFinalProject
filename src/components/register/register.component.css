@@ -34,3 +34,11 @@ form {
     align-items: center;
     /* מרכז את הקומפוננטה אנכית */
 }
+
+mat-form-field {
+    width: 80%; /* או רוחב קבוע */
+}
+
+mat-icon-button {
+    height: 80%; /* מבטיח שהכפתור יתאים לגובה השדה */
+}

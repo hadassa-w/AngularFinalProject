@@ -9,14 +9,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule, FormsModule, MatFormFieldModule, MatInputModule, FormsModule, MatDividerModule, MatSelectModule,MatButtonModule],
+  imports: [ReactiveFormsModule, RouterModule, FormsModule, MatFormFieldModule, MatInputModule, FormsModule, MatDividerModule, MatSelectModule, MatButtonModule, MatIconModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  hide: boolean = true;
   registerForm: FormGroup;
   private router: Router; // הוספת המשתנה router כמאפיין של הקומפוננטה
   errorMessage: string = '';

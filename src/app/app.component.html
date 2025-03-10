@@ -1,9 +1,12 @@
 @if(isLoggedIn===false)
 {
-<h1 class="entry">Welcome!</h1>
 <section class="entry">
     <div>
-        <button mat-raised-button class="links" [routerLink]="['/login']">Login</button>
+        <button mat-raised-button class="links" [routerLink]="['/']">
+            <mat-icon>home</mat-icon>
+            Home
+        </button>
+         <button mat-raised-button class="links" [routerLink]="['/login']">Login</button>
         <button mat-raised-button class="links" [routerLink]="['/register']">
             <mat-icon>person_add</mat-icon>
             Register
