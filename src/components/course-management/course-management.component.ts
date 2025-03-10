@@ -18,8 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
 export class CourseManagementComponent {
   courses: Course[] = [];
   newCourse: Course = new Course('', '', 0);
-  token: string | any = sessionStorage.getItem("token")
-  role: string | any = localStorage.getItem('role')
+  token: string | any = null
+  role: string | any = null
   CourseForm: FormGroup;
   isEditMode = false;
 
@@ -37,6 +37,10 @@ export class CourseManagementComponent {
       console.log(courseData.title);
       console.log('Edit mode');
       this.isEditMode = true;
+    }
+    if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+      this.token= sessionStorage.getItem("token")
+      this.role = localStorage.getItem('role')
     }
   }
 

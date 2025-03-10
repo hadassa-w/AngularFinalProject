@@ -13,19 +13,23 @@ import { catchError, tap, of } from 'rxjs';
   styleUrl: './lessons-list.component.css'
 })
 export class LessonsListComponent implements OnInit {
-  lessons: Lesson[] = []; 
-  token: string | any = sessionStorage.getItem("token");
-  role: string | any = localStorage.getItem('role');
+  lessons: Lesson[] = [];
+  token: string | any = null;
+  role: string | any = null;
   courseData: any;
 
   constructor(private courseService: LessonsService, private http: HttpClient, private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.courseData = navigation?.extras.state?.['courseData'];
+    if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+      this.token = sessionStorage.getItem("token");
+      this.role = localStorage.getItem('role');
+    }
   }
 
   ngOnInit() {
     console.log(this.courseData);
-    
+
     this.courseService.getLessons(this.token, this.courseData.id).pipe(
       tap(data => {
         this.lessons = data; // שמירת המידע במערך
@@ -64,7 +68,7 @@ export class LessonsListComponent implements OnInit {
 
   AddLesson() {
     const course = this.courseData;
-    const courseData = JSON.parse(JSON.stringify(course)); 
+    const courseData = JSON.parse(JSON.stringify(course));
     this.router.navigate(['/addLesson'], { state: { courseData } });
   }
 }

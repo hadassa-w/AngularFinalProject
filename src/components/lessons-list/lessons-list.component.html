@@ -1,15 +1,13 @@
-<button class="links" (click)="AddLesson()">Add course</button>
-
-<div class="courses-list">
+<div>
+    @if(role=="teacher")
+    { <button class="links" (click)="AddLesson()">Add lesson</button>}
     <h1>Lesson list</h1>
-
-    {{lessons.length}}
     @if(lessons && lessons.length > 0)
     {
-    <div>
+    <div id="lesson">
         @for(lesson of lessons; track lesson.id)
         {
-        <div class="course-card">
+        <div>
             <h2>{{ lesson.title }}</h2>
             <p>Lesson description: {{ lesson.content }}</p>
             @if(role==="teacher"){

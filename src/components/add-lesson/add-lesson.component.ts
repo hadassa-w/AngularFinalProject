@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LessonsService } from '../../services/lessons/lessons.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,14 +16,14 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule, RouterLink],
   templateUrl: './add-lesson.component.html',
   styleUrl: './add-lesson.component.css'
 })
 export class AddLessonComponent {
   courseData: any;
   LessonForm: FormGroup;
-  token: string = sessionStorage.getItem("token") ?? "";
+  token: string | any = "";
   isEditMode = false;
   lessonData: any;
 
@@ -39,6 +39,9 @@ export class AddLessonComponent {
         content: [this.lessonData ? this.lessonData.content : '', Validators.required],
       })
     });
+    if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+      this.token = sessionStorage.getItem("token");
+    }
   }
 
   onSubmit(): void {
@@ -47,7 +50,7 @@ export class AddLessonComponent {
         this.LessonForm.value.lesson.title,
         this.LessonForm.value.lesson.content,
         this.courseData.id,
-        this.token,
+        this.token == null ? "" : this.token,
         this.lessonData.id // ה-ID של השיעור שאתה מעדכן
       ).subscribe({
         next: (data) => {
@@ -60,7 +63,7 @@ export class AddLessonComponent {
     else {
       if (this.LessonForm && this.LessonForm.valid) {
         console.log(this.LessonForm.value.lesson);
-        this.lessonService.createLesson(this.LessonForm.value.lesson.title, this.LessonForm.value.lesson.content, this.courseData.id, this.token).subscribe({
+        this.lessonService.createLesson(this.LessonForm.value.lesson.title, this.LessonForm.value.lesson.content, this.courseData.id, this.token == null ? "" : this.token).subscribe({
           next: (data) => console.log("The course was added successfully."), error: (err) => console.log("ERROR: ", err)
         });
       };

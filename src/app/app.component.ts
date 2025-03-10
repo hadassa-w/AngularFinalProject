@@ -10,7 +10,6 @@ import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/rout
 })
 export class AppComponent {
   title = 'AngularProject';
-
   isLoggedIn: boolean = false;
 
   constructor(private router: Router) {
