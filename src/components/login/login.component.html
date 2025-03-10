@@ -1,9 +1,9 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h1>Log in as an existing user</h1>
     <mat-form-field class="example-full-width">
-        <mat-label>Email</mat-label>
+        <mat-label>Enter your Email</mat-label>
         <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
-            placeholder="Enter your Email. Ex. pat@example.com">
+            placeholder="Ex. pat@example.com">
         @if (loginForm.get('email')?.hasError('email') && !loginForm.get('email')?.hasError('required')){
         <mat-error>Please enter a valid email address</mat-error>
         }
@@ -14,8 +14,8 @@
     <br>
 
     <mat-form-field class="example-full-width">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" placeholder="Enter your password">
+        <mat-label>Enter your password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Password">
         @if (loginForm.get('password')?.hasError('required')){
         <mat-error> Password is <strong>required</strong></mat-error>
         }

@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-lessons-list',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule,MatIconModule],
+  imports: [MatCardModule, MatButtonModule,MatIconModule,],
   templateUrl: './lessons-list.component.html',
   styleUrl: './lessons-list.component.css'
 })
