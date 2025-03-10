@@ -12,7 +12,7 @@
     <mat-form-field class="example-full-width">
         <mat-label>Enter your email</mat-label>
         <input type="Enter your Email" matInput formControlName="email" [errorStateMatcher]="matcher"
-            placeholder="Ex. pat@example.com">
+        placeholder="For example: user@example.com">
         @if (registerForm.get('email')?.hasError('email') && !registerForm.get('email')?.hasError('required')){
         <mat-error>Please enter a valid email address</mat-error>
         }
