@@ -1,5 +1,4 @@
 <form [formGroup]="LessonForm" (ngSubmit)="onSubmit()">
-    <button class="links" [routerLink]="['/lessonsList']">Lessons list</button>
     <h1>{{ isEditMode ? 'Lesson editing' : 'Adding a lesson - for teachers only' }}</h1>
     <div formGroupName="lesson">
         <mat-form-field class="example-full-width">

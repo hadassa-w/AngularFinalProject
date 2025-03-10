@@ -11,12 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-add-lesson',
   standalone: true,
-  imports: [MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatButtonModule,
-    ReactiveFormsModule, RouterLink],
+  imports: [MatButtonModule, MatInputModule, MatFormFieldModule, MatIconModule, MatButtonModule, ReactiveFormsModule],
   templateUrl: './add-lesson.component.html',
   styleUrl: './add-lesson.component.css'
 })
