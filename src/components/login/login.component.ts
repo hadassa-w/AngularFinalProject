@@ -47,6 +47,7 @@ export class LoginComponent {
         },
         error: (error) => {
           this.errorMessage = 'Login failed. Please check your email and password.';
+          alert('Login failed');
           console.error('Login failed', error);
         }
       });

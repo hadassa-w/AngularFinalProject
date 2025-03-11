@@ -61,7 +61,7 @@ body {
 }
 
 .icon {
-    font-size: 24px;
+    font-size: 25px;
     color: #6200ea;
 }
 
@@ -69,4 +69,9 @@ body {
     margin-top: 40px;
     font-size: 14px;
     color: #999;
+}
+
+span{
+    font-size: 20px;
+    font-weight: bold;
 }

@@ -1,5 +1,7 @@
 <div class="welcome-container">
-    <div class="header">
+    <p><span>Current date: </span>{{ currentDate | date:'fullDate' }}</p>
+    <p><span>Date in custom format: </span>{{ currentDate | date:'dd/MM/yyyy' }}</p>
+    <div class="header" appHome>
         <h1>Welcome to Our Digital Courses!</h1>
         <p>You are invited to view the various courses and improve your skills ---</p>
     </div>

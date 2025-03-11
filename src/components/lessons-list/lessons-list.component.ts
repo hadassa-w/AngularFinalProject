@@ -52,6 +52,7 @@ export class LessonsListComponent implements OnInit {
 
     this.http.delete(`http://localhost:3000/api/courses/${courseId}/lessons/${lessonId}`, { headers }).pipe(
       tap(response => {
+        alert('Lesson deleted successfully');
         console.log('Lesson deleted successfully', response);
         // עדכון המערך לאחר מחיקת השיעור
         this.lessons = this.lessons.filter(lesson => lesson.id !== lessonId);

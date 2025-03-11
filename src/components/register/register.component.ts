@@ -44,6 +44,7 @@ export class RegisterComponent {
         },
         error: (error) => {
           this.errorMessage = 'Registration failed. Please try again.';
+          alert('Registration failed');
           console.error('Registration failed', error);
         }
       });

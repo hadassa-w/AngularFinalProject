@@ -78,6 +78,7 @@ export class CoursesListComponent implements OnInit {
       this.http.post<User>(`http://localhost:3000/api/courses/${course.id}/enroll`, { userId }, { headers })
         .subscribe({
           next: (response) => {
+            alert('the user join successfully');
             console.log('the user join successfully', response);
           },
           error: (error) => {
@@ -102,6 +103,7 @@ export class CoursesListComponent implements OnInit {
       })
         .subscribe({
           next: (response) => {
+            alert('the user delete successfully');
             console.log('the user delete successfully', response);
           },
           error: (error) => {
@@ -123,6 +125,7 @@ export class CoursesListComponent implements OnInit {
       this.http.delete(`http://localhost:3000/api/courses/${id}`, { headers })
         .subscribe({
           next: (response) => {
+            alert('Course deleted successfully');
             console.log('Course deleted successfully', response);
             this.courses = this.courses.filter(course => course.id !== id);
           },

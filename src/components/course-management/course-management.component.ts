@@ -93,11 +93,11 @@ export class CourseManagementComponent {
         console.log(this.CourseForm.value);
         this.coursesService.updateCourse(this.CourseForm.value.course.title, this.CourseForm.value.course.description, userId, this.token, this.CourseForm.value.course.id).subscribe({
           next: (data) => {
-            console.log("The course was successfully updated.")
+            alert("The course was successfully updated.")
             console.log(data);
 
           }
-          , error: (err) => console.log("no")
+          , error: (err) => console.log("ERROR")
         });
       };
     }
@@ -105,7 +105,7 @@ export class CourseManagementComponent {
       if (this.CourseForm.valid) {
         console.log(this.CourseForm.value);
         this.coursesService.createCourse(this.CourseForm.value.course.title, this.CourseForm.value.course.description, userId, this.token).subscribe({
-          next: (data) => console.log("The course was added successfully."), error: (err) => console.log("ERROR: ", err)
+          next: (data) => alert("The course was added successfully."), error: (err) => console.log("ERROR: ", err)
         });
       };
     }

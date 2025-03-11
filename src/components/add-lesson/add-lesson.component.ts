@@ -49,17 +49,21 @@ export class AddLessonComponent {
         this.lessonData.id // ה-ID של השיעור שאתה מעדכן
       ).subscribe({
         next: (data) => {
-          console.log("The lesson was successfully updated.");
+          alert("The lesson was successfully updated.");
           console.log(data);
         },
-        error: (err) => console.log("Error updating lesson", err)
+        error: (err) => {
+          alert("Error updating lesson");
+          console.log("Error updating lesson", err);
+        }
+
       });
     }
     else {
       if (this.LessonForm && this.LessonForm.valid) {
         console.log(this.LessonForm.value.lesson);
         this.lessonService.createLesson(this.LessonForm.value.lesson.title, this.LessonForm.value.lesson.content, this.courseData.id, this.token == null ? "" : this.token).subscribe({
-          next: (data) => console.log("The course was added successfully."), error: (err) => console.log("ERROR: ", err)
+          next: (data) => alert("The course was added successfully."), error: (err) => { console.log("ERROR: ", err) }
         });
       };
     }
