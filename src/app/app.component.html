@@ -17,6 +17,7 @@
 @if (isLoggedIn===true) {
 <section class="entry">
     <div>
+        <app-information [data]="parentData" style="position: absolute; left: 0;"></app-information>
         <button mat-raised-button class="links" [routerLink]="['/coursesList']">
             <mat-icon>list</mat-icon>
             Courses list

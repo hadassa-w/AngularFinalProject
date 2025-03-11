@@ -11,11 +11,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { InformationComponent } from "../information/information.component";
 
 @Component({
   selector: 'app-courses-list',
   standalone: true,
-  imports: [MatDividerModule, MatCardModule, MatListModule, MatButtonModule, MatIconModule, RouterLink],
+  imports: [MatDividerModule, MatCardModule, MatListModule, MatButtonModule, MatIconModule, RouterLink, InformationComponent],
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.css']
 })

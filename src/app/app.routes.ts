@@ -7,6 +7,7 @@ import { LessonsListComponent } from '../components/lessons-list/lessons-list.co
 import { AddLessonComponent } from '../components/add-lesson/add-lesson.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from '../components/home/home.component';
+import { InformationComponent } from '../components/information/information.component';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'coursesList', component: CoursesListComponent },
   { path: 'lessonsList', component: LessonsListComponent },
   { path: 'manageCourses', component: CourseManagementComponent },
+  { path: 'information', component: InformationComponent },
   { path: 'addLesson', component: AddLessonComponent },
 ];
