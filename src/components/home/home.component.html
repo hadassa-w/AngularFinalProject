@@ -1,13 +1,37 @@
-<div>
-    <h1 class="entry">Welcome to our digital courses!</h1>
+<div class="welcome-container">
+    <div class="header">
+        <h1>Welcome to Our Digital Courses!</h1>
+        <p>You are invited to view the various courses and improve your skills ---</p>
+    </div>
 
-    <p>You are invited to enter and view the various courses ---</p>
-    <p> Registered in the system? </p>
-    <button mat-raised-button class="links" [routerLink]="['/login']">Login</button>
+    <div class="content">
+        <div class="info-section">
+            <mat-card class="info-card">
+                <mat-icon class="icon">school</mat-icon>
+                <h3>Diverse Learning Paths</h3>
+                <p>Choose from numerous categories to fit your interests.</p>
+            </mat-card>
 
-    <p> Not registered yet? </p>
-    <button mat-raised-button class="links" [routerLink]="['/register']">
-        <mat-icon>person_add</mat-icon>
-        Register
-    </button>
+            <mat-card class="info-card">
+                <mat-icon class="icon">verified_user</mat-icon>
+                <h3>Professional teachers</h3>
+                <p>Learn from experienced professionals.</p>
+            </mat-card>
+        </div>
+
+        <div class="action-section">
+            <p>Already a member?</p>
+            <button mat-raised-button class="links" [routerLink]="['/login']">Login</button>
+
+            <p>New here?</p>
+            <button mat-raised-button class="links" [routerLink]="['/register']">
+                <mat-icon>person_add</mat-icon>
+                Register
+            </button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; All rights reserved to Digital Course. 2025.</p>
+    </div>
 </div>

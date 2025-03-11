@@ -20,31 +20,65 @@ body {
     /* מרכז את הקומפוננטה אנכית */
 }
 
-div {
-    max-width: 500px;
-    /* מגביל את הרוחב של הטופס */
-    padding: 20px;
-    /* ריווח פנימי */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* צל לטופס */
-    border-radius: 8px;
-    /* פינות מעוגלות */
-    background-color: #fff;
-    /* צבע רקע לבן */
-    display: flex;
-    /* משתמש ב-Flexbox */
-    flex-direction: column;
-    /* מסדר את האלמנטים בעמודה */
-    align-items: center;
-    /* מרכז את האלמנטים בציר ה-X */
-    justify-content: center;
-    /* מרכז את האלמנטים בציר ה-Y */
+
+
+.welcome-container {
+    text-align: center;
+    padding: 50px;
+    background: linear-gradient(to bottom, #f0f0f0, #ffffff);
 }
 
-:host {
+.header {
+    background: #ffffff;
+    color: #333;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.cta-button {
+    margin-top: 20px;
+    background-color: #6200ea;
+    color: white;
+}
+
+.content {
     display: flex;
-    justify-content: center;
-    /* מרכז את הקומפוננטה אופקית */
-    align-items: center;
-    /* מרכז את הקומפוננטה אנכית */
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.info-section {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.action-section {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.info-card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+}
+
+.info-card:hover {
+    transform: scale(1.05);
+}
+
+.icon {
+    font-size: 24px;
+    color: #6200ea;
+}
+
+.footer {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #999;
 }
