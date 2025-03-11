@@ -17,23 +17,25 @@
                 <h2>Professional teachers</h2>
                 <p>Learn from experienced professionals.</p>
             </mat-card>
- 
+
             <mat-card class="info-card">
                 <mat-icon class="icon">schedule</mat-icon>
                 <h2>Availability</h2>
                 <p>Access to courses anytime, anywhere.</p>
             </mat-card>
-       </div>
+        </div>
 
         <div class="action-section">
-            <p>Already a member?</p>
-            <button mat-raised-button class="links" [routerLink]="['/login']">Login</button>
-
-            <p>New here?</p>
-            <button mat-raised-button class="links" [routerLink]="['/register']">
-                <mat-icon>person_add</mat-icon>
-                Register
-            </button>
+            <mat-card class="info-card">
+                <p>Already a member?</p>
+                <button mat-raised-button class="links" [routerLink]="['/login']">Login</button>
+                <br>
+                <p>New here?</p>
+                <button mat-raised-button class="links" [routerLink]="['/register']">
+                    <mat-icon>person_add</mat-icon>
+                    Register
+                </button>
+            </mat-card>
         </div>
     </div>
 
