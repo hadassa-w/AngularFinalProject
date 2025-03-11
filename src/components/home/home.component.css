@@ -1,23 +1,17 @@
 .entry {
     display: flex;
-    /* משתמש ב-Flexbox */
     flex-direction: column;
-    /* מגדיר את הכיוון לעמודה */
     align-items: center;
-    /* מרכז את האובייקטים על ציר ה-X */
 }
 
 .links {
     margin: 0 10px;
-    /* מוסיף רווח בין הקישורים */
 }
 
 body {
     display: flex;
     justify-content: center;
-    /* מרכז את הקומפוננטה אופקית */
     align-items: center;
-    /* מרכז את הקומפוננטה אנכית */
 }
 
 
@@ -35,12 +29,6 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 40px;
-}
-
-.cta-button {
-    margin-top: 20px;
-    background-color: #6200ea;
-    color: white;
 }
 
 .content {
