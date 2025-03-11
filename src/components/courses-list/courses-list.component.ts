@@ -126,7 +126,6 @@ export class CoursesListComponent implements OnInit {
       this.http.delete(`http://localhost:3000/api/courses/${id}`, { headers })
         .subscribe({
           next: (response) => {
-            alert('Course deleted successfully');
             console.log('Course deleted successfully', response);
             this.courses = this.courses.filter(course => course.id !== id);
           },
